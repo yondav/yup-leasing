@@ -137,7 +137,7 @@ BuildingAmen.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'bulding_amenities',
+    modelName: 'building_amenities',
   }
 );
 

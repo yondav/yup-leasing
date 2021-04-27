@@ -1,0 +1,105 @@
+/**
+ * /seeds/unitAmen-seeds.js
+ *
+ * @description: seeds data for unit amenities table
+ *
+ */
+
+const { UnitAmen } = require('../models');
+
+const unitAmenData = [
+  {
+    balcony: true,
+    garden: false,
+    private_roof: false,
+    roof_rights: false,
+    terrace: true,
+    central_air: true,
+    dishwasher: true,
+    fireplace: false,
+    hardwood_floors: true,
+    washer_dryer: false,
+    city_view: true,
+    garden_view: false,
+    park_view: false,
+    skyline_view: true,
+    water_view: false,
+    unit_id: 1,
+  },
+  {
+    balcony: false,
+    garden: true,
+    private_roof: false,
+    roof_rights: false,
+    terrace: true,
+    central_air: true,
+    dishwasher: true,
+    fireplace: false,
+    hardwood_floors: true,
+    washer_dryer: false,
+    city_view: true,
+    garden_view: false,
+    park_view: false,
+    skyline_view: true,
+    water_view: false,
+    unit_id: 2,
+  },
+  {
+    balcony: false,
+    garden: false,
+    private_roof: false,
+    roof_rights: false,
+    terrace: true,
+    central_air: true,
+    dishwasher: true,
+    fireplace: false,
+    hardwood_floors: true,
+    washer_dryer: true,
+    city_view: true,
+    garden_view: true,
+    park_view: false,
+    skyline_view: true,
+    water_view: false,
+    unit_id: 3,
+  },
+  {
+    balcony: false,
+    garden: false,
+    private_roof: false,
+    roof_rights: false,
+    terrace: false,
+    central_air: true,
+    dishwasher: true,
+    fireplace: false,
+    hardwood_floors: true,
+    washer_dryer: false,
+    city_view: true,
+    garden_view: false,
+    park_view: false,
+    skyline_view: true,
+    water_view: false,
+    unit_id: 4,
+  },
+  {
+    balcony: true,
+    garden: false,
+    private_roof: false,
+    roof_rights: false,
+    terrace: true,
+    central_air: true,
+    dishwasher: true,
+    fireplace: false,
+    hardwood_floors: true,
+    washer_dryer: false,
+    city_view: true,
+    garden_view: false,
+    park_view: false,
+    skyline_view: true,
+    water_view: false,
+    unit_id: 5,
+  },
+];
+
+const seedUnitAmen = () => UnitAmen.bulkCreate(unitAmenData);
+
+module.exports = seedUnitAmen;
