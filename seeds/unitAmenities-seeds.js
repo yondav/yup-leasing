@@ -5,9 +5,9 @@
  *
  */
 
-const { UnitAmen } = require('../models');
+const { UnitAmenities } = require('../models');
 
-const unitAmenData = [
+const unitAmenitiesData = [
   {
     balcony: true,
     garden: false,
@@ -100,6 +100,6 @@ const unitAmenData = [
   },
 ];
 
-const seedUnitAmen = () => UnitAmen.bulkCreate(unitAmenData);
+const seedUnitAmenities = () => UnitAmenities.bulkCreate(unitAmenitiesData);
 
-module.exports = seedUnitAmen;
+module.exports = seedUnitAmenities;

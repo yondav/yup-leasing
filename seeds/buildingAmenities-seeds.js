@@ -5,9 +5,9 @@
  *
  */
 
-const { BuildingAmen } = require('../models');
+const { BuildingAmenities } = require('../models');
 
-const buildingAmenData = [
+const buildingAmenitiesData = [
   {
     pets_allowed: true,
     roof: false,
@@ -106,6 +106,6 @@ const buildingAmenData = [
   },
 ];
 
-const seedBuildingAmen = () => BuildingAmen.bulkCreate(buildingAmenData);
+const seedBuildingAmenities = () => BuildingAmenities.bulkCreate(buildingAmenitiesData);
 
-module.exports = seedBuildingAmen;
+module.exports = seedBuildingAmenities;

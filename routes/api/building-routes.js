@@ -6,15 +6,16 @@
  */
 
 const router = require('express').Router();
-const { Building, Management, Unit } = require('../../models');
+const { Building, Management, Unit, BuildingAmenities, UnitAmenities } = require('../../models');
 
-// get all building companies
+// get all building
 router.get('/', async (req, res) => {
   try {
     const buildingData = await Building.findAll({
       include: [
+        { model: BuildingAmenities, as: 'building_amenities' },
         { model: Management, as: 'management' },
-        { model: Unit, as: 'units' },
+        { model: Unit, as: 'units', include: [{ model: UnitAmenities, as: 'unit_amenities' }] },
       ],
     });
     res.status(200).json(buildingData);
@@ -24,13 +25,14 @@ router.get('/', async (req, res) => {
   }
 });
 
-// get one building company
+// get one building
 router.get('/:id', async (req, res) => {
   try {
     const buildingData = await Building.findByPk(req.params.id, {
       include: [
+        { model: BuildingAmenities, as: 'building_amenities' },
         { model: Management, as: 'management' },
-        { model: Unit, as: 'units' },
+        { model: Unit, as: 'units', include: [{ model: UnitAmenities, as: 'unit_amenities' }] },
       ],
     });
 
@@ -46,7 +48,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// create a building company
+// create a building
 router.post('/', async (req, res) => {
   try {
     const buildingData = await Building.create(req.body);
@@ -56,7 +58,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// update one building company
+// update one building
 router.put('/:id', async (req, res) => {
   try {
     const buildingData = await Building.update(req.body, {
