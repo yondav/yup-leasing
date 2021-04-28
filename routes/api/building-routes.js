@@ -8,7 +8,7 @@
 const router = require('express').Router();
 const { Building, Management, Unit } = require('../../models');
 
-// get all management companies
+// get all building companies
 router.get('/', async (req, res) => {
   try {
     const buildingData = await Building.findAll({
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// get one management company
+// get one building company
 router.get('/:id', async (req, res) => {
   try {
     const buildingData = await Building.findByPk(req.params.id, {
