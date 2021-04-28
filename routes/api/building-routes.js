@@ -28,7 +28,10 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const buildingData = await Building.findByPk(req.params.id, {
-      include: [{ model: Management, as: 'management' }],
+      include: [
+        { model: Management, as: 'management' },
+        { model: Unit, as: 'units' },
+      ],
     });
 
     if (!buildingData) {
@@ -37,61 +40,60 @@ router.get('/:id', async (req, res) => {
     }
 
     res.status(200).json(buildingData);
-    console.log(buildingData);
   } catch (err) {
     res.status(500).json(err);
     console.log(err);
   }
 });
 
-// // create a management company
-// router.post('/', async (req, res) => {
-//   try {
-//     const managementData = await Management.create(req.body);
-//     res.status(200).json(managementData);
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
+// create a building company
+router.post('/', async (req, res) => {
+  try {
+    const buildingData = await Building.create(req.body);
+    res.status(200).json(buildingData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
-// // update one management company
-// router.put('/:id', async (req, res) => {
-//   try {
-//     const managementData = await Management.update(req.body, {
-//       where: {
-//         id: req.params.id,
-//       },
-//     });
+// update one building company
+router.put('/:id', async (req, res) => {
+  try {
+    const buildingData = await Building.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
 
-//     if (!managementData) {
-//       res.status(404).json({ message: `No management company found with id: ${req.params.id}!` });
-//       return;
-//     } else {
-//       res.json(managementData);
-//     }
-//   } catch (err) {
-//     res.status(500).json;
-//   }
-// });
+    if (!buildingData) {
+      res.status(404).json({ message: `No building found with id: ${req.params.id}!` });
+      return;
+    } else {
+      res.json(buildingData);
+    }
+  } catch (err) {
+    res.status(500).json;
+  }
+});
 
-// // delete one category
-// router.delete('/:id', async (req, res) => {
-//   try {
-//     const managementData = await Management.destroy({
-//       where: {
-//         id: req.params.id,
-//       },
-//     });
+// delete one building
+router.delete('/:id', async (req, res) => {
+  try {
+    const buildingData = await Building.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
 
-//     if (!managementData) {
-//       res.status(404).json({ message: `No management company found with id: ${req.params.id}!` });
-//       return;
-//     }
+    if (!buildingData) {
+      res.status(404).json({ message: `No building found with id: ${req.params.id}!` });
+      return;
+    }
 
-//     res.status(200).json(managementData);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+    res.status(200).json(buildingData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;

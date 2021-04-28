@@ -35,8 +35,7 @@ Building.init(
       allowNull: false,
       validate: {
         isNumeric: true,
-        max: 5,
-        min: 5,
+        len: 5,
       },
     },
     management_id: {
