@@ -6,7 +6,7 @@
  */
 
 const express = require('express');
-const { sequelize } = require('./models/Product');
+const { sequelize } = require('./models/Building');
 const routes = require('./routes');
 
 const app = express();

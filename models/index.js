@@ -12,10 +12,9 @@ const BuildingAmen = require('./BuildingAmen');
 const Unit = require('./Unit');
 const UnitAmen = require('./UnitAmen');
 
-// Management.hasMany(Building, {
-//   foreignKey: 'management_id',
-//   onDelete: 'SET NULL',
-// });
+Management.hasMany(Building, {
+  foreignKey: 'management_id',
+});
 
 Building.belongsTo(Management, {
   foreignKey: 'management_id',

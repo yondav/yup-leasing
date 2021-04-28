@@ -46,7 +46,7 @@ Unit.init(
       allowNull: false,
     },
     lease_term: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     gross_rent: {
@@ -64,7 +64,7 @@ Unit.init(
     },
     // come back to this one *******
     net_rent: {
-      type: DataTypes.VIRTUAL,
+      type: DataTypes.VIRTUAL(DataTypes.INTEGER),
       get() {
         return (
           ((this.getDataValue(lease_term) - this.getDataValue(months_free)) * this.getDataValue(gross_rent)) /
