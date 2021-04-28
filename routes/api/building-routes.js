@@ -24,24 +24,25 @@ router.get('/', async (req, res) => {
   }
 });
 
-// // get one management company
-// router.get('/:id', async (req, res) => {
-//   try {
-//     const managementData = await Management.findByPk(req.params.id, {
-//       include: [{ model: Building, as: 'buildings' }],
-//     });
+// get one management company
+router.get('/:id', async (req, res) => {
+  try {
+    const buildingData = await Building.findByPk(req.params.id, {
+      include: [{ model: Management, as: 'management' }],
+    });
 
-//     if (!managementData) {
-//       res.status(404).json({ message: `No management company found with id: ${req.params.id}!` });
-//       return;
-//     }
+    if (!buildingData) {
+      res.status(404).json({ message: `No building found with id: ${req.params.id}!` });
+      return;
+    }
 
-//     res.status(200).json(managementData);
-//   } catch (err) {
-//     res.status(500).json(err);
-//     console.log(err);
-//   }
-// });
+    res.status(200).json(buildingData);
+    console.log(buildingData);
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err);
+  }
+});
 
 // // create a management company
 // router.post('/', async (req, res) => {

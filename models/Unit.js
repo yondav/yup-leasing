@@ -7,6 +7,7 @@
 
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
+const { beforeCreate } = require('./Building.js');
 
 class Unit extends Model {}
 
@@ -64,12 +65,9 @@ Unit.init(
     },
     // come back to this one *******
     net_rent: {
-      type: DataTypes.VIRTUAL(DataTypes.INTEGER),
+      type: DataTypes.INTEGER,
       get() {
-        return (
-          ((this.getDataValue(lease_term) - this.getDataValue(months_free)) * this.getDataValue(gross_rent)) /
-          this.getDataValue(lease_term)
-        );
+        return ((this.lease_term - this.months_free) * this.gross_rent) / this.lease_term;
       },
     },
     furnished: {
