@@ -50,21 +50,21 @@ const UnitAmenitiesOutdoor = require('./UnitAmenitiesOutdoor');
 //   as: 'unit_amenities',
 // });
 
-// UnitAmenities.belongsTo(Unit, {
-//   foreignKey: 'unit_id',
-//   as: 'unit_amenities',
-// });
-
-// Unit.hasOne(UnitAmenities, {
-//   foreignKey: 'unit_id',
-//   as: 'unit_amenities',
-// });
-
-UnitAmenitiesOutdoor.belongsToMany(Unit, {
-  through: {
-    model: UnitAmenities,
-  },
+UnitAmenities.belongsTo(Unit, {
+  foreignKey: 'unit_id',
+  as: 'unit_amenities',
 });
+
+Unit.hasOne(UnitAmenities, {
+  foreignKey: 'unit_id',
+  as: 'unit_amenities',
+});
+
+// UnitAmenitiesOutdoor.belongsToMany(Unit, {
+//   through: {
+//     model: UnitAmenities,
+//   },
+// });
 
 UnitLease.belongsTo(Unit, {
   foreignKey: 'unit_id',
