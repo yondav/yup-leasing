@@ -11,6 +11,7 @@ const Building = require('./Building');
 const BuildingAmenities = require('./BuildingAmenities');
 const Unit = require('./Unit');
 const UnitAmenities = require('./UnitAmenities');
+const UnitLease = require('./UnitLease');
 
 // Management.hasMany(Building, {
 //   foreignKey: 'management_id',
@@ -51,6 +52,16 @@ UnitAmenities.belongsTo(Unit, {
   as: 'unit_amenities',
 });
 
+UnitLease.belongsTo(Unit, {
+  foreignKey: 'unit_id',
+  as: 'unit_lease',
+});
+
+Unit.hasOne(UnitLease, {
+  foreignKey: 'unit_id',
+  as: 'unit_lease',
+});
+
 Unit.hasOne(UnitAmenities, {
   foreignKey: 'unit_id',
   as: 'unit_amenities',
@@ -82,4 +93,4 @@ Building.belongsTo(Management, {
   foreignKey: 'management_id',
 });
 
-module.exports = { Management, Building, BuildingAmenities, Unit, UnitAmenities };
+module.exports = { Management, Building, BuildingAmenities, Unit, UnitLease, UnitAmenities };

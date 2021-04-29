@@ -8,9 +8,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
 
-class Unit extends Model {}
+class UnitLease extends Model {}
 
-Unit.init(
+UnitLease.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -18,31 +18,37 @@ Unit.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    unit_num: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    status: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    market_as: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    access: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    op: {
+    gross_rent: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    building_id: {
+    concession: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
+    months_free: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    move_in: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isDate: true,
+      },
+    },
+    // net_rent: {
+    //   type: DataTypes.INTEGER,
+    //   get() {
+    //     return ((this.lease_term - this.months_free) * this.gross_rent) / this.lease_term;
+    //   },
+    // },
+    unit_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'building',
+        model: 'unit',
         key: 'id',
       },
     },
@@ -52,8 +58,8 @@ Unit.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'unit',
+    modelName: 'unit_lease',
   }
 );
 
-module.exports = Unit;
+module.exports = UnitLease;
