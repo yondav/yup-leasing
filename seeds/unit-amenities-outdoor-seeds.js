@@ -14,6 +14,7 @@ const unitAmenitiesOutdoorData = [
     private_roof: false,
     roof_rights: false,
     terrace: true,
+    unit_amenities_id: 1,
   },
 ];
 

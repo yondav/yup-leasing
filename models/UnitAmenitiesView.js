@@ -1,16 +1,16 @@
 /**
- * /models/UnitAmenitiesOutdoor.js
+ * /models/UnitAmenitiesView.js
  *
- * @description: Database Models: unit_amenities_outdoor
+ * @description: Database Models: unit_amenities_view
  *
  */
 
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
 
-class UnitAmenitiesOutdoor extends Model {}
+class UnitAmenitiesView extends Model {}
 
-UnitAmenitiesOutdoor.init(
+UnitAmenitiesView.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -18,27 +18,27 @@ UnitAmenitiesOutdoor.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    balcony: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-      allowNull: false,
-    },
-    garden: {
+    city_view: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false,
     },
-    private_roof: {
+    garden_view: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false,
     },
-    roof_rights: {
+    park_view: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false,
     },
-    terrace: {
+    skyline_view: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
+    water_view: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false,
@@ -57,8 +57,8 @@ UnitAmenitiesOutdoor.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'unit_amenities_outdoor',
+    modelName: 'unit_amenities_view',
   }
 );
 
-module.exports = UnitAmenitiesOutdoor;
+module.exports = UnitAmenitiesView;

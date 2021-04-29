@@ -6,7 +6,16 @@
  */
 
 const router = require('express').Router();
-const { Unit, UnitLease, UnitRooms, UnitDesc, UnitAmenities, UnitAmenitiesOutdoor } = require('../../models');
+const {
+  Unit,
+  UnitLease,
+  UnitRooms,
+  UnitDesc,
+  UnitAmenities,
+  UnitAmenitiesOutdoor,
+  UnitAmenitiesFeatures,
+  UnitAmenitiesView,
+} = require('../../models');
 
 // get all units
 router.get('/', async (req, res) => {
@@ -16,7 +25,15 @@ router.get('/', async (req, res) => {
         { model: UnitLease, as: 'unit_lease' },
         { model: UnitRooms, as: 'unit_rooms' },
         { model: UnitDesc, as: 'unit_desc' },
-        { model: UnitAmenitiesOutdoor, as: 'unit_amenities_outdoor' },
+        {
+          model: UnitAmenities,
+          as: 'unit_amenities',
+          include: [
+            { model: UnitAmenitiesOutdoor, as: 'unit_amenities_outdoor' },
+            { model: UnitAmenitiesFeatures, as: 'unit_amenities_feautures' },
+            { model: UnitAmenitiesView, as: 'unit_amenities_view' },
+          ],
+        },
       ],
     });
     res.status(200).json(unitData);
@@ -26,37 +43,62 @@ router.get('/', async (req, res) => {
   }
 });
 
-// // get one building
-// router.get('/:id', async (req, res) => {
-//   try {
-//     const buildingData = await Building.findByPk(req.params.id, {
-//       include: [
-//         { model: Management, as: 'management' },
-//         { model: BuildingAmenities, as: 'building_amenities' },
-//       ],
-//     });
+// get one unit
+router.get('/:id', async (req, res) => {
+  try {
+    const unitData = await Unit.findAll({
+      include: [
+        { model: UnitLease, as: 'unit_lease' },
+        { model: UnitRooms, as: 'unit_rooms' },
+        { model: UnitDesc, as: 'unit_desc' },
+        {
+          model: UnitAmenities,
+          as: 'unit_amenities',
+          include: [
+            { model: UnitAmenitiesOutdoor, as: 'unit_amenities_outdoor' },
+            { model: UnitAmenitiesFeatures, as: 'unit_amenities_feautures' },
+            { model: UnitAmenitiesView, as: 'unit_amenities_view' },
+          ],
+        },
+      ],
+    });
 
-//     if (!buildingData) {
-//       res.status(404).json({ message: `No building found with id: ${req.params.id}!` });
-//       return;
-//     }
+    if (!unitData) {
+      res.status(404).json({ message: `No building found with id: ${req.params.id}!` });
+      return;
+    }
 
-//     res.status(200).json(buildingData);
-//   } catch (err) {
-//     res.status(500).json(err);
-//     console.log(err);
-//   }
-// });
+    res.status(200).json(unitData);
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err);
+  }
+});
 
-// // create a building
-// router.post('/', async (req, res) => {
-//   try {
-//     const buildingData = await Building.create(req.body);
-//     res.status(200).json(buildingData);
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
+// // create a unit
+router.post('/', async (req, res) => {
+  try {
+    const unitData = await Unit.create(req.body, {
+      include: [
+        { association: UnitLease },
+        { association: UnitRooms },
+        { association: UnitDesc },
+        {
+          association: UnitAmenities,
+          include: [
+            { association: UnitAmenitiesOutdoor },
+            { association: UnitAmenitiesFeatures },
+            { association: UnitAmenitiesView },
+          ],
+        },
+      ],
+    });
+    res.status(200).json(unitData);
+  } catch (err) {
+    res.status(400).json(err);
+    console.log(err);
+  }
+});
 
 // // update one building
 // router.put('/:id', async (req, res) => {

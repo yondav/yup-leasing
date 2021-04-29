@@ -15,70 +15,27 @@ const UnitRooms = require('./UnitRooms');
 const UnitDesc = require('./UnitDesc');
 const UnitAmenities = require('./UnitAmenities');
 const UnitAmenitiesOutdoor = require('./UnitAmenitiesOutdoor');
+const UnitAmenitiesFeatures = require('./UnitAmenitiesFeatures');
+const UnitAmenitiesView = require('./UnitAmenitiesView');
 
-// Management.hasMany(Building, {
-//   foreignKey: 'management_id',
-// });
-
-// Building.belongsTo(Management, {
-//   foreignKey: 'management_id',
-// });
-
-// BuildingAmenities.belongsTo(Building, {
-//   foreignKey: 'building_id',
-// });
-
-// Building.hasOne(BuildingAmenities, {
-//   foreignKey: 'building_id',
-//   as: 'building_amenities',
-// });
-
-// Building.hasMany(Unit, {
-//   foreignKey: 'building_id',
-// });
-
-// Unit.belongsTo(Building, {
-//   foreignKey: 'building_id',
-// });
-
-// UnitAmenities.belongsTo(Unit, {
-//   foreignKey: 'unit_id',
-// });
-
-// Unit.hasOne(UnitAmenities, {
-//   foreignKey: 'unit_id',
-//   as: 'unit_amenities',
-// });
-
-// UnitAmenities.belongsTo(Unit, {
-//   foreignKey: 'unit_id',
-//   as: 'unit_amenities',
-// });
-
-// Unit.hasOne(UnitAmenities, {
-//   foreignKey: 'unit_id',
-//   as: 'unit_amenities',
-// });
-
-UnitAmenitiesOutdoor.belongsToMany(Unit, {
-  through: {
-    model: UnitAmenities,
-  },
+UnitAmenities.hasOne(UnitAmenitiesView, {
+  foreignKey: 'unit_amenities_id',
+  as: 'unit_amenities_view',
 });
 
-UnitLease.belongsTo(Unit, {
-  foreignKey: 'unit_id',
-  as: 'unit_lease',
+UnitAmenities.hasOne(UnitAmenitiesFeatures, {
+  foreignKey: 'unit_amenities_id',
+  as: 'unit_amenities_feautures',
 });
 
-UnitRooms.belongsTo(Unit, {
-  foreignKey: 'unit_id',
-  as: 'unit_rooms',
+UnitAmenities.hasOne(UnitAmenitiesOutdoor, {
+  foreignKey: 'unit_amenities_id',
+  as: 'unit_amenities_outdoor',
 });
 
-UnitDesc.belongsTo(Unit, {
+Unit.hasOne(UnitAmenities, {
   foreignKey: 'unit_id',
-  as: 'unit_desc',
+  as: 'unit_amenities',
 });
 
 Unit.hasOne(UnitLease, {
@@ -95,6 +52,8 @@ Unit.hasOne(UnitDesc, {
   foreignKey: 'unit_id',
   as: 'unit_desc',
 });
+
+// *************************
 
 Unit.belongsTo(Building, {
   foreignKey: 'building_id',
@@ -132,4 +91,6 @@ module.exports = {
   UnitDesc,
   UnitAmenities,
   UnitAmenitiesOutdoor,
+  UnitAmenitiesFeatures,
+  UnitAmenitiesView,
 };
