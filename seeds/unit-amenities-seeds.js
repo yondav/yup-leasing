@@ -26,8 +26,8 @@ const unitAmenitiesData = [
 ];
 
 const seedUnitAmenities = async () => {
-  await UnitAmenities.bulkCreate(unitAmenitiesData);
-  // await seedUnitAmenitiesOutdoor();
+  await seedUnitAmenitiesOutdoor();
+  UnitAmenities.bulkCreate(unitAmenitiesData);
 };
 
 module.exports = seedUnitAmenities;

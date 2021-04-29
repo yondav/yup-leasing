@@ -18,10 +18,6 @@ UnitAmenitiesOutdoor.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    desc: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
     balcony: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,

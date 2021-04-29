@@ -6,7 +6,7 @@
  */
 
 const router = require('express').Router();
-const { Unit, UnitLease, UnitRooms, UnitDesc } = require('../../models');
+const { Unit, UnitLease, UnitRooms, UnitDesc, UnitAmenities, UnitAmenitiesOutdoor } = require('../../models');
 
 // get all units
 router.get('/', async (req, res) => {
@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
         { model: UnitLease, as: 'unit_lease' },
         { model: UnitRooms, as: 'unit_rooms' },
         { model: UnitDesc, as: 'unit_desc' },
+        { model: UnitAmenitiesOutdoor, as: 'unit_amenities_outdoor' },
       ],
     });
     res.status(200).json(unitData);
