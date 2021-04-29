@@ -23,9 +23,9 @@ const unitData = [
 
 const seedUnit = async () => {
   await Unit.bulkCreate(unitData);
-  seedUnitLease();
-  seedUnitRooms();
-  seedUnitDesc();
+  await seedUnitLease();
+  await seedUnitRooms();
+  await seedUnitDesc();
 };
 
 module.exports = seedUnit;
