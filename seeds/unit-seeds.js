@@ -6,7 +6,9 @@
  */
 
 const { Unit } = require('../models');
-const seedUnitLease = require('./unit-lease-seed');
+const seedUnitLease = require('./unit-lease-seeds');
+const seedUnitRooms = require('./unit-rooms-seeds');
+const seedUnitDesc = require('./unit-desc-seeds');
 
 const unitData = [
   {
@@ -22,6 +24,8 @@ const unitData = [
 const seedUnit = async () => {
   await Unit.bulkCreate(unitData);
   seedUnitLease();
+  seedUnitRooms();
+  seedUnitDesc();
 };
 
 module.exports = seedUnit;

@@ -13,6 +13,7 @@ const unitLeaseData = [
     concession: false,
     months_free: 0,
     lease_term: 12,
+    move_in: 'May 1, 2021',
     unit_id: 1,
   },
 ];

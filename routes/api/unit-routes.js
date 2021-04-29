@@ -6,13 +6,17 @@
  */
 
 const router = require('express').Router();
-const { Unit, UnitLease } = require('../../models');
+const { Unit, UnitLease, UnitRooms, UnitDesc } = require('../../models');
 
 // get all units
 router.get('/', async (req, res) => {
   try {
     const unitData = await Unit.findAll({
-      include: [{ model: UnitLease, as: 'unit_lease' }],
+      include: [
+        { model: UnitLease, as: 'unit_lease' },
+        { model: UnitRooms, as: 'unit_rooms' },
+        { model: UnitDesc, as: 'unit_desc' },
+      ],
     });
     res.status(200).json(unitData);
   } catch (err) {

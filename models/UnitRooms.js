@@ -1,16 +1,16 @@
 /**
- * /models/UnitLease.js
+ * /models/UnitRooms.js
  *
- * @description: Database Models: unit_lease
+ * @description: Database Models: unit_rooms
  *
  */
 
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
 
-class UnitLease extends Model {}
+class UnitRooms extends Model {}
 
-UnitLease.init(
+UnitRooms.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -18,35 +18,30 @@ UnitLease.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    gross_rent: {
+    total_rooms: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    concession: {
+    legal_beds: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    full_bath: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    half_bath: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    size: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    furnished: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false,
-    },
-    months_free: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    lease_term: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    move_in: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isDate: true,
-      },
-    },
-    net_rent: {
-      type: DataTypes.INTEGER,
-      get() {
-        return ((this.lease_term - this.months_free) * this.gross_rent) / this.lease_term;
-      },
     },
     unit_id: {
       type: DataTypes.INTEGER,
@@ -62,8 +57,8 @@ UnitLease.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'unit_lease',
+    modelName: 'unit_rooms',
   }
 );
 
-module.exports = UnitLease;
+module.exports = UnitRooms;
