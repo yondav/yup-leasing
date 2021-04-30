@@ -80,15 +80,15 @@ router.post('/', async (req, res) => {
   try {
     const unitData = await Unit.create(req.body, {
       include: [
-        { association: UnitLease },
-        { association: UnitRooms },
-        { association: UnitDesc },
+        { association: Unit.hasOne(UnitLease) },
+        { association: Unit.hasOne(UnitRooms) },
+        { association: Unit.hasOne(UnitDesc) },
         {
-          association: UnitAmenities,
+          association: Unit.hasOne(UnitAmenities),
           include: [
-            { association: UnitAmenitiesOutdoor },
-            { association: UnitAmenitiesFeatures },
-            { association: UnitAmenitiesView },
+            { association: UnitAmenities.hasOne(UnitAmenitiesOutdoor) },
+            { association: UnitAmenities.hasOne(UnitAmenitiesFeatures) },
+            { association: UnitAmenities.hasOne(UnitAmenitiesView) },
           ],
         },
       ],
