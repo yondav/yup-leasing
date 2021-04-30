@@ -6,26 +6,34 @@
  */
 
 const { Unit } = require('../models');
-const seedUnitLease = require('./unit-lease-seeds');
-const seedUnitRooms = require('./unit-rooms-seeds');
-const seedUnitDesc = require('./unit-desc-seeds');
 
 const unitData = [
   {
-    unit_num: '1F',
-    status: 'active',
-    market_as: 'apartment',
-    access: 'Call Tenant: Raymond (929) 293-3100',
-    op: 100,
     building_id: 1,
+    unit_num: '1F',
+    lease: {
+      status: 'in contract',
+      market_as: 'apartment',
+      gross_rent: 2500,
+      concession: true,
+      months_free: 1,
+      lease_term: 12,
+      move_in: 'May 1, 2021',
+    },
+    rooms: {
+      total_rooms: 4,
+      legal_beds: 2,
+      full_bath: 1,
+      half_bath: 1,
+      size: 1000,
+    },
+    access: 'lockbox 1234',
+    op: 100,
+    desc: 'this is a description',
+    furnished: false,
   },
 ];
 
-const seedUnit = async () => {
-  await Unit.bulkCreate(unitData);
-  await seedUnitLease();
-  await seedUnitRooms();
-  await seedUnitDesc();
-};
+const seedUnit = async () => await Unit.bulkCreate(unitData);
 
 module.exports = seedUnit;

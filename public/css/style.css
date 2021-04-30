@@ -1,0 +1,59 @@
+@import url('https://use.typekit.net/ihv0ezr.css');
+@import url('https://use.typekit.net/ihv0ezr.css');
+
+:root {
+  --yup-pink: #d07bb3;
+  --muli: muli, sans-serif;
+  --futura: futura-pt-condensed, sans-serif;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  margin: 0;
+  font-family: var(--muli) !important;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+nav {
+  width: 100vw;
+  background-color: var(--yup-pink);
+  box-shadow: rgba(51, 51, 51, 0.45) 0.95px 0.95px 7.6px;
+}
+
+nav img {
+  width: 5rem;
+}
+
+button:active,
+button:focus {
+  outline: none !important;
+}
+
+main {
+  /* width: 85vw; */
+  margin-top: 3rem;
+}
+
+.address-input {
+  padding: 0 !important;
+  /* background-color: var(--yup-pink); */
+}
+
+.address-input h2 {
+  text-align: center;
+}
+
+.submit-btn:hover {
+  background-color: var(--yup-pink);
+}
