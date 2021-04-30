@@ -18,17 +18,23 @@ Unit.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    building_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'building',
+        key: 'id',
+      },
+    },
     unit_num: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    status: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    lease: {
+      type: DataTypes.JSON,
     },
-    market_as: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    rooms: {
+      type: DataTypes.JSON,
     },
     access: {
       type: DataTypes.STRING,
@@ -38,13 +44,14 @@ Unit.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    building_id: {
-      type: DataTypes.INTEGER,
+    desc: {
+      type: DataTypes.STRING,
       allowNull: false,
-      references: {
-        model: 'building',
-        key: 'id',
-      },
+    },
+    furnished: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: true,
     },
   },
   {

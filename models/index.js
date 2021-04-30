@@ -10,50 +10,13 @@ const Management = require('./Management');
 const Building = require('./Building');
 const BuildingAmenities = require('./BuildingAmenities');
 const Unit = require('./Unit');
-const UnitLease = require('./UnitLease');
-const UnitRooms = require('./UnitRooms');
-const UnitDesc = require('./UnitDesc');
 const UnitAmenities = require('./UnitAmenities');
-const UnitAmenitiesOutdoor = require('./UnitAmenitiesOutdoor');
-const UnitAmenitiesFeatures = require('./UnitAmenitiesFeatures');
-const UnitAmenitiesView = require('./UnitAmenitiesView');
-
-UnitAmenities.hasOne(UnitAmenitiesView, {
-  foreignKey: 'unit_amenities_id',
-  as: 'unit_amenities_view',
-});
-
-UnitAmenities.hasOne(UnitAmenitiesFeatures, {
-  foreignKey: 'unit_amenities_id',
-  as: 'unit_amenities_feautures',
-});
-
-UnitAmenities.hasOne(UnitAmenitiesOutdoor, {
-  foreignKey: 'unit_amenities_id',
-  as: 'unit_amenities_outdoor',
-});
 
 Unit.hasOne(UnitAmenities, {
   foreignKey: 'unit_id',
   as: 'unit_amenities',
+  // onDelete: 'CASCADE',
 });
-
-Unit.hasOne(UnitLease, {
-  foreignKey: 'unit_id',
-  as: 'unit_lease',
-});
-
-Unit.hasOne(UnitRooms, {
-  foreignKey: 'unit_id',
-  as: 'unit_rooms',
-});
-
-Unit.hasOne(UnitDesc, {
-  foreignKey: 'unit_id',
-  as: 'unit_desc',
-});
-
-// *************************
 
 Unit.belongsTo(Building, {
   foreignKey: 'building_id',
@@ -86,11 +49,5 @@ module.exports = {
   Building,
   BuildingAmenities,
   Unit,
-  UnitLease,
-  UnitRooms,
-  UnitDesc,
   UnitAmenities,
-  UnitAmenitiesOutdoor,
-  UnitAmenitiesFeatures,
-  UnitAmenitiesView,
 };

@@ -18,6 +18,15 @@ UnitAmenities.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    outdoor: {
+      type: DataTypes.JSON,
+    },
+    features: {
+      type: DataTypes.JSON,
+    },
+    view: {
+      type: DataTypes.JSON,
+    },
     unit_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
