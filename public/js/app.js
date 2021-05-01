@@ -16,22 +16,15 @@ function activatePlacesSearch() {
 const getTrain = async (address) => {
   const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${gKey}`);
   const data = await response.json();
+  console.log(data);
 
-  if (response) {
-    lat = data.results[0].geometry.location.lat;
-    lon = data.results[0].geometry.location.lng;
-    console.log(lat, lon);
-  }
+  const street =
+    data.results[0].address_components[0].long_name + ' ' + data.results[0].address_components[1].long_name;
+  const neighborhood = data.results[0].address_components[2].long_name;
+  const city = data.results[0].address_components[3].long_name;
+  const zip = data.results[0].address_components[4].long_name;
 
-  const placeRes = await fetch(
-    `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=train_station
-    &keyword=cruise&key=${gKey}`
-  );
-  const placeData = await placeRes.json();
-
-  if (placeRes) {
-    console.log(placeData);
-  }
+  console.log(street, neighborhood, city, zip);
 };
 
 submitBtn.addEventListener('click', () => {
