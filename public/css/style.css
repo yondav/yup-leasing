@@ -54,6 +54,10 @@ main {
   text-align: center;
 }
 
-.submit-btn:hover {
+.create-btn:hover {
   background-color: var(--yup-pink);
+}
+
+.hide {
+  display: none !important;
 }
