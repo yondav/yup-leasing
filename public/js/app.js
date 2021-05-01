@@ -6,28 +6,32 @@ gScript.src = `https://maps.googleapis.com/maps/api/js?key=${gKey}&libraries=pla
 document.body.append(gScript);
 
 const addressInput = document.getElementById('address');
-const submitBtn = document.querySelector('.submit-btn');
+const unitInput = document.getElementById('unit');
+const createBtn = document.querySelector('.create-btn');
+let addressVal;
+let unitVal;
 
 // autocomplete from google places
 function activatePlacesSearch() {
   const autocomplete = new google.maps.places.Autocomplete(addressInput);
 }
 
-const getTrain = async (address) => {
+createBtn.addEventListener('click', () => {
+  addressVal = addressInput.value;
+  unitVal = unitInput.value;
+  buildingAddress(addressVal);
+});
+
+const buildingAddress = async (address) => {
   const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${gKey}`);
   const data = await response.json();
-  console.log(data);
 
   const street =
-    data.results[0].address_components[0].long_name + ' ' + data.results[0].address_components[1].long_name;
-  const neighborhood = data.results[0].address_components[2].long_name;
-  const city = data.results[0].address_components[3].long_name;
-  const zip = data.results[0].address_components[4].long_name;
+    (await data.results[0].address_components[0].long_name) + ' ' + data.results[0].address_components[1].long_name;
+  const neighborhood = await data.results[0].address_components[2].long_name;
+  const city = await data.results[0].address_components[3].long_name;
+  const zip = await data.results[0].address_components[4].long_name;
 
   console.log(street, neighborhood, city, zip);
+  console.log(unitVal);
 };
-
-submitBtn.addEventListener('click', () => {
-  const inputVal = addressInput.value;
-  getTrain(inputVal);
-});
