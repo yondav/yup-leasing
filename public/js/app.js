@@ -1,25 +1,57 @@
 // add/edit listing - mgmt dropdown card
-const mgmtDrop = document.querySelector('.mgmt-dropdown');
-const options = document.querySelectorAll('option');
-console.log(mgmtDrop);
+const MgmtFormHandler = () => {
+  const cardFooter = document.querySelector('.card-footer');
+  const mgmt = document.getElementById('mgmt');
+  const mgmtForm = document.querySelector('.mgmt-form');
+  const mgmtDrop = document.querySelector('.mgmt-dropdown');
+  const options = mgmtDrop.options;
 
-const selectRow = document.querySelector('.select-mgmt-row');
-const addRow = document.querySelector('.add-mgmt-row hide');
-
-mgmtDrop.addEventListener('click', () => {
-  options.forEach((option) => {
-    option.addEventListener('click', (e) => {
-      if (e.target.hasAttribute('selected') && e.target.value === 'Add New Management Company') {
-        selectRow.classList.toggle('hide');
-        addRow.classList.toggle('hide');
-      } else if (e.target.hasAttribute('selected') && e.target.hasAttribute('value')) {
-        const value = e.target.getAttribute('value');
-        console.log(value);
-      }
-    });
+  const selectRow = document.querySelector('.select-mgmt-row');
+  const addRow = document.querySelector('.add-mgmt-row');
+  mgmtDrop.addEventListener('change', () => {
+    if (
+      options.selectedIndex > 0 &&
+      options.selectedIndex < options.length - 1 &&
+      cardFooter.classList.contains('hide')
+    ) {
+      cardFooter.classList.toggle('hide');
+    } else if (options.selectedIndex === 0) {
+      if (!cardFooter.classList.contains('hide')) cardFooter.classList.toggle('hide');
+    } else if (options.selectedIndex === options.length - 1) {
+      if (cardFooter.classList.contains('hide')) cardFooter.classList.toggle('hide');
+      addRow.classList.remove('hide');
+      selectRow.classList.add('hide');
+    }
   });
-});
 
+  mgmtForm.addEventListener('submit', async (e) => {
+    const mgmtVal = mgmt.value.trim();
+    e.preventDefault();
+    if (options.selectedIndex === options.length - 1) {
+      if (mgmtVal === '') {
+        alert('Please enter a valid management company before submitting');
+      } else {
+        confirm(`Select OK to add management company: ${mgmt.value}`);
+        const createMgmt = await fetch('/api/management', {
+          method: 'POST',
+          body: JSON.stringify({ management_name: mgmtVal }),
+          headers: { 'Content-Type': 'application/json' },
+        });
+        createMgmt.ok ? alert('Management Company Added') : alert('No good');
+      }
+    } else {
+      const mgmtID = mgmtDrop.value;
+      console.log(mgmtID);
+      const getMgmt = await fetch(`/api/management/${mgmtID}`, {
+        method: 'GET',
+      });
+      const mgmtData = await getMgmt.json();
+      console.log(mgmtData);
+    }
+  });
+};
+
+MgmtFormHandler();
 // // script tag for google places
 // const gKey = 'AIzaSyBX63r-WVeIUwaLArYbnhDTKwDwWt8np-s';
 // dbURL = 'http://localhost:5000/api/';
