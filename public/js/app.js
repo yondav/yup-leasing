@@ -37,16 +37,11 @@ const MgmtFormHandler = () => {
           body: JSON.stringify({ management_name: mgmtVal }),
           headers: { 'Content-Type': 'application/json' },
         });
-        createMgmt.ok ? alert('Management Company Added') : alert('No good');
+        createMgmt.ok ? document.location.replace(`/new-listing/management/buildings/${mgmtVal}`) : alert('No good');
       }
     } else {
-      const mgmtID = mgmtDrop.value;
-      console.log(mgmtID);
-      const getMgmt = await fetch(`/api/management/${mgmtID}`, {
-        method: 'GET',
-      });
-      const mgmtData = await getMgmt.json();
-      console.log(mgmtData);
+      const mgmtID = await mgmtDrop.value;
+      document.location.replace(`/new-listing/management/buildings/${mgmtID}`);
     }
   });
 };

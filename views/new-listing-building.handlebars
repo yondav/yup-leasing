@@ -1,0 +1,36 @@
+<div class="container main-card">
+  <div class="row d-flex justify-content-center mgmt-card">
+    <div class="card col-md address-input m-2 inner-card">
+      <div class="card-body container">
+        <div class="row d-flex justify-content-center">
+          <div class="col">
+            <h2>Building</h2>
+          </div>
+        </div>
+        <hr>
+        <form class="mgmt-form">
+          <div class="row d-flex justify-content-center select-mgmt-row">
+            <select class="custom-select mgmt-dropdown">
+              <option selected="">Select Building Associated with {{mgmt.management_name}}</option>
+              {{#each buildings as |building|}}
+              <option value={{ building.id }}>{{building.street_address}}</option>
+              {{/each}}
+              <option>Add New Building {{mgmt}} </option>
+            </select>
+          </div>
+          <div class="row d-flex justify-content-center add-mgmt-row hide">
+            <hr>
+            <div class="form-group col">
+              <label for="management-company">Street Address</label>
+              <input type="text" class="form-control" id="mgmt" placeholder="">
+            </div>
+          </div>
+          </div>
+          <div class="card-footer d-flex justify-content-center hide">
+            <button type="button" class="btn btn-outline-dark col-6 m-2">Cancel</button>
+            <button type="submit" class="btn btn-outline-dark col-6 m-2 next-btn">Next</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
