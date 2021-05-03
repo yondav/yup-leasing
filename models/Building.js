@@ -34,9 +34,12 @@ Building.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isNumeric: true,
+        // isNumeric: true,
         len: 5,
       },
+    },
+    trains: {
+      type: DataTypes.JSON,
     },
     management_id: {
       type: DataTypes.INTEGER,

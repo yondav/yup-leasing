@@ -10,7 +10,7 @@ const { UnitAmenities } = require('../models');
 const unitAmenitiesData = [
   {
     unit_amenities: {
-      unit_id: 3,
+      unit_id: 1,
       outdoor: {
         balcony: false,
         garden: true,

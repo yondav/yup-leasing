@@ -15,6 +15,7 @@ router.post('/', async (req, res) => {
     res.status(200).json(buildingAmenitiesData);
   } catch (err) {
     res.status(400).json(err);
+    console.log(err);
   }
 });
 

@@ -58,6 +58,7 @@ const buildingFormHandler = () => {
   buildingForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const buildingVal = buildingInput.value.trim();
+    const mgmtID = document.getElementById('mgmt-id');
     if (options.selectedIndex === options.length - 1) {
       if (buildingVal === '') {
         alert('Please enter valid address before submitting');
@@ -89,13 +90,13 @@ const buildingFormHandler = () => {
           const stationLon = station.the_geom.coordinates[0];
 
           const distance = (lat1, lon1, lat2, lon2, unit) => {
-            var radlat1 = (Math.PI * lat1) / 180;
-            var radlat2 = (Math.PI * lat2) / 180;
-            var radlon1 = (Math.PI * lon1) / 180;
-            var radlon2 = (Math.PI * lon2) / 180;
-            var theta = lon1 - lon2;
-            var radtheta = (Math.PI * theta) / 180;
-            var dist =
+            let radlat1 = (Math.PI * lat1) / 180;
+            let radlat2 = (Math.PI * lat2) / 180;
+            let radlon1 = (Math.PI * lon1) / 180;
+            let radlon2 = (Math.PI * lon2) / 180;
+            let theta = lon1 - lon2;
+            let radtheta = (Math.PI * theta) / 180;
+            let dist =
               Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
             dist = Math.acos(dist);
             dist = (dist * 180) / Math.PI;
@@ -108,13 +109,26 @@ const buildingFormHandler = () => {
             }
             stations.push({
               station_name: stationName,
-              station_lines: stationLines,
+              station_lines: stationLines.split('-'),
               distance: dist,
             });
+            stations.sort((a, b) => (a.distance > b.distance ? 1 : -1));
           };
           distance(lat, lon, stationLat, stationLon, 'M');
         });
-        console.log(stations);
+        // console.log(stations.slice(0, 5));
+        const createBuilding = await fetch('/api/building', {
+          method: 'POST',
+          body: JSON.stringify({
+            street_address: street,
+            neighborhood: neighborhood,
+            city: city,
+            zip_code: zip,
+            trains: stations.slice(0, 5),
+            management_id: mgmtID.value.trim(),
+          }),
+          headers: { 'Content-Type': 'application/json' },
+        });
       }
     }
   });
