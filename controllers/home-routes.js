@@ -17,16 +17,10 @@ router.get('/new-listing/management', async (req, res) => {
 // get management by id for building list
 router.get('/new-listing/management/buildings/:id', async (req, res) => {
   try {
-    const mgmt = await Management.findAll({
-      where: {
-        id: req.params.id,
-      },
-      raw: true,
-    });
-    // const mgmt = mgmtData.get({ plain: true });
-    console.log(mgmt);
+    const mgmtData = await Management.findAll({ where: { id: req.params.id } });
     const mgmtBuildings = await Building.findAll({ where: { management_id: req.params.id } });
     const buildings = mgmtBuildings.map((building) => building.get({ plain: true }));
+    const mgmt = mgmtData.map((m) => m.get({ plain: true }));
     res.render('new-listing-building', { buildings, mgmt });
   } catch (err) {
     console.log(err);
@@ -35,16 +29,16 @@ router.get('/new-listing/management/buildings/:id', async (req, res) => {
 });
 
 // get management by user inputted management company name for building list
-router.get('/new-listing/management/buildings/:name', async (req, res) => {
-  try {
-    const mgmtData = await Management.findAll({ where: { management_name: req.params.name } });
-    const mgmt = mgmtData.map((m) => m.get({ plain: true }));
-    console.log(mgmtData);
-    res.render('new-listing-building', { mgmt });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
+// router.get('/new-listing/management/buildings/:name', async (req, res) => {
+//   try {
+//     const mgmtData = await Management.findAll({ where: { management_name: req.params.name } });
+//     const mgmt = mgmtData.map((m) => m.get({ plain: true }));
+//     console.log(mgmtData);
+//     res.render('new-listing-new-mgmt-building', { mgmt });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
 
 module.exports = router;

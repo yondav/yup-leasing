@@ -9,8 +9,8 @@
         </div>
         <hr>
         <form class="mgmt-form">
-          <div class="row d-flex justify-content-center select-mgmt-row">
-            <select class="custom-select mgmt-dropdown">
+          <div class="row d-flex justify-content-center select-row">
+            <select class="custom-select dropdown">
               <option selected="">Select Management Company</option>
               {{#each mgmt as |mgmt|}}
               <option value={{ mgmt.id }}>{{mgmt.management_name}}</option>
@@ -18,7 +18,7 @@
               <option>Add New Management Company</option>
             </select>
           </div>
-          <div class="row d-flex justify-content-center add-mgmt-row hide">
+          <div class="row d-flex justify-content-center add-row hide">
             <hr>
             <div class="form-group col">
               <label for="management-company">Management Company Name</label>
